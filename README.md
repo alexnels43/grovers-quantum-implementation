@@ -39,3 +39,9 @@ We can see the gates generated via Grover's algorithm here:
 ![4 Qubit Diagram](https://github.com/alexnels43/grovers-quantum-implementation/blob/master/4-qubit-diagram.png)
 
 As we can see, as predicted, we have 3 repetitions of the oracle and amplification as well as the initialization and measurement of our qubit states.
+
+As an example of what our expected output would be when running Grover's Algorithm on quantum hardware we can utilize IBMs Quantum computer. Below are the results from generating a 3 qubit input algorithm with 010 as the goal oracle. 
+
+![IBM Quantum Results](https://github.com/alexnels43/grovers-quantum-implementation/blob/master/ibm-quantum-hardware-results.png)
+
+As we can see there is more overall interference due to the fact that these results are coming from actual quantum hardware rather than a simulation.

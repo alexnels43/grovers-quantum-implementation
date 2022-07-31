@@ -27,38 +27,48 @@ def print_unitary_matrix(circuit):
 def initialize_oracle(oracle, quantum_register, oracle_vector):
     num_qubits = oracle.num_qubits
     # Applying Pauli-X gates to 0 values of our oracle vector
+    reversed_oracle_vector = oracle_vector[::-1]
     for n in range(0, len(oracle_vector)):
-        if oracle_vector[n] == '0':
+        if reversed_oracle_vector[n] == '0':
             oracle.x(quantum_register[n])
+    # Applying a Hadamard gate to our final qubit
     oracle.h(quantum_register[num_qubits - 1])
+    # Applying a controlled NOT gate with our final qubit as the target
     if num_qubits == 2: oracle.cx(quantum_register[0], quantum_register[1])
     if num_qubits == 3: oracle.ccx(quantum_register[0], quantum_register[1], quantum_register[2])
     if num_qubits == 4: oracle.mcx([quantum_register[0], quantum_register[1], quantum_register[2]], quantum_register[3])
-    if num_qubits == 5: oracle.mcx([quantum_register[0], quantum_register[1], quantum_register[2], quantum_register[3]],
-                                   quantum_register[4])
+    if num_qubits == 5: oracle.mcx([quantum_register[0], quantum_register[1], quantum_register[2], quantum_register[3]], quantum_register[4])
+    # Applying a Hadamard gate to our final qubit
     oracle.h(quantum_register[num_qubits - 1])
+    # Applying Pauli-X gates to 0 values of our oracle vector
     for n in range(0, len(oracle_vector)):
-        if oracle_vector[n] == '0':
+        if reversed_oracle_vector[n] == '0':
             oracle.x(quantum_register[n])
+    # Adding a bar for ease of visualization
     oracle.barrier(quantum_register)
     return oracle
 
 
 def initialize_amplifier(amplifier, quantum_register):
     num_qubits = amplifier.num_qubits
-
+    # Applying a Hadamard to all qubits
     amplifier.h(quantum_register)
+    # Applying a NOT to all qubits
     amplifier.x(quantum_register)
+    # Applying a Hadamard to the final qubit
     amplifier.h(quantum_register[num_qubits - 1])
+    # Applying a controlled NOT gate with our final qubit as the target
     if num_qubits == 2: amplifier.cx(quantum_register[0], quantum_register[1]);
     if num_qubits == 3: amplifier.ccx(quantum_register[0], quantum_register[1], quantum_register[2])
-    if num_qubits == 4: amplifier.mcx([quantum_register[0], quantum_register[1], quantum_register[2]],
-                                      quantum_register[3])
-    if num_qubits >= 5: amplifier.mcx(
-        [quantum_register[0], quantum_register[1], quantum_register[2], quantum_register[3]], quantum_register[4])
+    if num_qubits == 4: amplifier.mcx([quantum_register[0], quantum_register[1], quantum_register[2]], quantum_register[3])
+    if num_qubits == 5: amplifier.mcx([quantum_register[0], quantum_register[1], quantum_register[2], quantum_register[3]], quantum_register[4])
+    # Applying a Hadamard to the final qubit
     amplifier.h(quantum_register[num_qubits - 1])
+    # Applying a NOT to all qubits
     amplifier.x(quantum_register)
+    # Applying a Hadamard to all qubits
     amplifier.h(quantum_register)
+    # Adding a bar for ease of visualization
     amplifier.barrier(quantum_register)
     return amplifier
 
