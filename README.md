@@ -27,3 +27,15 @@ General Grover's Steps:
 
 ## How To Run
 In this repository you will find a jupyter notebook which will allow you to run Grover's algorithm on either a simulated quantum computer or on quantum computing hardware. This notebook can be used on [Google Colab](https://colab.research.google.com/) for easy execution. The python code is also attached and is runnable locally, the `requirements.txt` file contains all required libraries.
+
+
+## Output Analysis
+In the attached jupyter notebook you will find a detailed analysis of the steps executed while implementing Grover's algorithm. However, I wanted to analyze an example set generated gates.
+
+In this example we had `0101` as our target state, meaning 4 qubits in play. We know that we will have $\pi/4\sqrt{n}$ repetitions of the oracle and amplification gates. Given the 4 qubits we can calculate that 2 ^ 4 = 16 potential states. Which means $\pi/4\sqrt{16}$ = $\pi$ = ~3.14 which will be rounded down to 3 repetitions.
+
+We can see the gates generated via Grover's algorithm here: 
+
+![4 Qubit Diagram](https://github.com/alexnels43/grovers-quantum-implementation/blob/master/4-qubit-diagram.png)
+
+As we can see, as predicted, we have 3 repetitions of the oracle and amplification as well as the initialization and measurement of our qubit states.
